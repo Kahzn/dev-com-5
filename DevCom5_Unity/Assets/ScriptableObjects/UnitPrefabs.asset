@@ -17,6 +17,6 @@ MonoBehaviour:
   darkUnitPrefabs:
   - {fileID: 5538385078002968054, guid: cd24c7e95dd8dcc4384d42d8e086e5b1, type: 3}
   brightBuildingPrefabs:
-  - {fileID: 5428718812332583015, guid: 3043939a22e0acc40b21a96505d09197, type: 3}
+  - {fileID: 5428718812332583015, guid: f027ea10054856d45b6a654e0bbabee8, type: 3}
   darkBuildingPrefabs:
   - {fileID: 5428718812332583015, guid: 3043939a22e0acc40b21a96505d09197, type: 3}
