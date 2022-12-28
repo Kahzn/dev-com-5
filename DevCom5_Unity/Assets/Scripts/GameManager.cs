@@ -17,10 +17,12 @@ public enum BuildingType
 
 public class GameManager : MonoBehaviour
 {
+    public Material invalidBuildingLocationMaterial = null;
     public GameMode gameMode = GameMode.Normal;
     public GameObject towncenterPrefab = null;
-    public GameObject buildingPreview = null;
+    private GameObject buildingPreview = null;
     private List<GameObject> buildings = new();
+    private Material oldMaterial = null;
 
     // Start is called before the first frame update
     void Start()
@@ -44,12 +46,23 @@ public class GameManager : MonoBehaviour
                     if (buildingPreview == null)
                     {
                         buildingPreview = GameObject.Instantiate(towncenterPrefab);
-                        buildingPreview.GetComponentInChildren<NavMeshObstacle>().enabled = false;                        
+                        buildingPreview.GetComponentInChildren<NavMeshObstacle>().enabled = false;
+                        oldMaterial = buildingPreview.GetComponentInChildren<MeshRenderer>().material;
+                        Debug.Assert(oldMaterial != null);
                     }
-                    buildingPreview.transform.position = new Vector3(Mathf.Round(hit.point.x), hit.point.y, Mathf.Round(hit.point.z));                    
+                    buildingPreview.transform.position = new Vector3(Mathf.Round(hit.point.x), hit.point.y, Mathf.Round(hit.point.z));
+                    var building = buildingPreview.GetComponentInChildren<Building>();
+                    if (building.IsColliding())
+                    {
+                        buildingPreview.GetComponentInChildren<MeshRenderer>().material = invalidBuildingLocationMaterial;
+                    }
+                    else
+                    {
+                        Debug.Assert(oldMaterial != null);
+                        buildingPreview.GetComponentInChildren<MeshRenderer>().material = oldMaterial;
+                    }
                     if (Input.GetMouseButtonUp(0))
                     {
-                        var building = buildingPreview.GetComponentInChildren<Building>();
                         if (!building.IsColliding())
                         {
                             buildingPreview.GetComponentInChildren<NavMeshObstacle>().enabled = true;
