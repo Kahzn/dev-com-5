@@ -17,11 +17,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         uiManager = GameObject.Instantiate(uiManagerPrefab);
+        commandInput = new CommandInput();
+        commandInput.unitPrefabs = unitPrefabs;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
