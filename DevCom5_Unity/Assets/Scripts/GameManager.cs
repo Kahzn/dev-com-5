@@ -4,24 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum GameMode
-{
-    Normal,
-    Build,
-    Production,
-}
-
-public enum BuildingType
-{
-    TownCenter = 0,
-}
-
-
 public class GameManager : MonoBehaviour
 {
     public Material invalidBuildingLocationMaterial = null;
     public GameMode gameMode = GameMode.Normal;
     public GameObject towncenterPrefab = null;
+    public GameObject uiManagerPrefab = null;
+    private GameObject uiManager = null;
     private GameObject buildingPreview = null;
     private GameObject selectedBuilding = null;
     private List<GameObject> buildings = new();
@@ -30,7 +19,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        uiManager = GameObject.Instantiate(uiManagerPrefab);
     }
 
     // Update is called once per frame
