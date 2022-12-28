@@ -113,10 +113,6 @@ public class GameManager : MonoBehaviour
 
             case GameMode.Production:
                 {
-                    if (selectedBuilding)
-                    {
-                        Debug.Log(selectedBuilding.gameObject.name);
-                    }
                     if (Input.GetMouseButtonUp(0))
                     {
                         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -127,15 +123,17 @@ public class GameManager : MonoBehaviour
 
                             if (rigidBody == null) { SetNormalMode(); break; }
 
+                            bool set = false;
                             foreach (var building in buildings)
                             {
                                 if (rigidBody.gameObject == building)
                                 {
                                     SetProductionMode(building);
+                                    set = true;
                                     break;
                                 }
                             }
-                            SetNormalMode();
+                            if (!set) { SetNormalMode(); }
                         }
                     }
                     break;
@@ -149,6 +147,7 @@ public class GameManager : MonoBehaviour
 
     private void SetNormalMode()
     {
+        Debug.Log("Out");
         gameMode = GameMode.Normal;
         buildingPreview = null;
         selectedBuilding = null;
@@ -161,6 +160,7 @@ public class GameManager : MonoBehaviour
     }
     private void SetProductionMode(GameObject selected)
     {
+        Debug.Log(selected.name);
         gameMode = GameMode.Production;
         buildingPreview = null;
         selectedBuilding = selected;
