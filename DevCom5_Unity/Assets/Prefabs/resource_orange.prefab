@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 9041244379204607013}
   - component: {fileID: 7690290529182255720}
   - component: {fileID: 7690290529182255719}
+  - component: {fileID: 8850013187618840144}
   m_Layer: 0
   m_Name: resource_orange
   m_TagString: Untagged
@@ -210,3 +211,16 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5233765039159252939, guid: e2a68576e1a60de45aec2f388ac23253, type: 3}
+--- !u!114 &8850013187618840144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7383668820672740848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 177170fcd17f89f41a68efe2323a7d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0

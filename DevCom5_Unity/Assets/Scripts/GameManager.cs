@@ -8,14 +8,28 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance
     {
-        get; private set;
+        get
+        {
+            return instance;
+        }
     }
 
+    private static GameManager instance;
+
     public CommandInput commandInput = null;
-    public UnitPrefabsScriptableObject prefabCollection = null;
+    public UnitPrefabsScriptableObject prefabCollection;
     public Faction[] factions = new Faction[] { Faction.Bright, Faction.Dark, Faction.Gaia };
     public ResourceDepot[] resourceDepots = null;
     public List<GameObject> buildings = new();
+    public ResourceManager resources
+    {
+        get
+        {
+            return resource_manager;
+        }
+    }
+
+    private ResourceManager resource_manager = new();
 
     public GameManager()
     {
@@ -28,14 +42,14 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (instance != null && instance != this)
         {
             Destroy(gameObject);
             return;
         }
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;            
+            instance = this;
         }
     }
 

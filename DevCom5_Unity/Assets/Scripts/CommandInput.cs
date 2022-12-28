@@ -28,7 +28,9 @@ public class CommandInput
 
     public GameObject BuildBuilding(BuildingType type, Faction faction, Vector3 position)
     {
-        var prefab = GameManager.Instance.prefabCollection.GetBuildingPrefab(faction, type);        
+        var gamemanager = GameManager.Instance;
+        var prefabCollection = gamemanager.prefabCollection;
+        var prefab = prefabCollection.GetBuildingPrefab(faction, type);
         Debug.Assert(prefab != null);
         var building = GameManager.Instantiate(prefab, position, Quaternion.identity);
         building.GetComponentInChildren<Building>().faction = faction;
