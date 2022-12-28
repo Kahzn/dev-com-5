@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
+    public Faction faction = Faction.Bright;
     private int numCollisions = 0;
 
     // Start is called before the first frame update
@@ -18,19 +19,8 @@ public class Building : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("collide!!!!!");
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        Debug.Log("uncollide!!!!!");
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("collide");
         ++numCollisions;
         if (numCollisions == 1)
         {
@@ -40,7 +30,6 @@ public class Building : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("uncollide");
         --numCollisions;
         Debug.Assert(numCollisions >= 0);
         if (numCollisions == 0)
