@@ -6,6 +6,7 @@ using UnityEngine;
 public class Building : MonoBehaviour
 {
     public Faction faction = Faction.Bright;
+    public Transform spawnLocation = null;
     private int numCollisions = 0;
     [SerializeField] List<int> toBuild;
 
