@@ -6,17 +6,31 @@ using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance
+    {
+        get; private set;
+    }    
 
-    public GameObject uiManagerPrefab = null;
-    private GameObject uiManager = null;
+    public CommandInput commandInput = null;
+    public UnitPrefabsScriptableObject unitPrefabs = null;
+    public List<GameObject> buildings = new();
 
-    private List<GameObject> buildings = new();
-
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
-    {
-        uiManager = GameObject.Instantiate(uiManagerPrefab);
+    {        
         commandInput = new CommandInput();
         commandInput.unitPrefabs = unitPrefabs;
     }

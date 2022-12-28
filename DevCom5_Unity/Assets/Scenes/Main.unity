@@ -152,11 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f56ec1e276cc2043a7956d664e36fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invalidBuildingLocationMaterial: {fileID: 2100000, guid: 60f982d44ea7969468bf7b7de813a4c7, type: 2}
-  gameMode: 0
-  towncenterPrefab: {fileID: 5428718812332583015, guid: 3043939a22e0acc40b21a96505d09197, type: 3}
+  uiManagerPrefab: {fileID: 3187994114628661470, guid: 2c11ab74824e97c4e877ed1f3854884e, type: 3}
   unitPrefabs: {fileID: 11400000, guid: 8da152f8975949747a9c34109d4a37fc, type: 2}
-  testTarget: {fileID: 2035965124}
 --- !u!4 &6059991
 Transform:
   m_ObjectHideFlags: 0
