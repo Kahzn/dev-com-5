@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class uiManager : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class uiManager : MonoBehaviour
     public GameMode gameMode = GameMode.Normal;
     public Material invalidBuildingLocationMaterial = null;
     public GameObject towncenterPrefab = null;
+    public Button[] buttons = null;
 
     private GameObject buildingPreview = null;
     private GameObject selectedBuilding = null;
@@ -174,5 +177,10 @@ public class uiManager : MonoBehaviour
         gameMode = GameMode.Production;
         buildingPreview = null;
         selectedBuilding = selected;
+    }
+
+    public void BuildingButtonPress(int index)
+    {
+        Debug.Log(index);
     }
 }
