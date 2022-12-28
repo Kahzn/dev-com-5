@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance
     {
         get; private set;
-    }    
+    }
 
     public CommandInput commandInput = null;
     public UnitPrefabsScriptableObject unitPrefabs = null;
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {        
+    {
         commandInput = new CommandInput();
         commandInput.unitPrefabs = unitPrefabs;
     }
@@ -39,5 +39,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void Test()
+    {
+        var position = new Vector3(2, 0, 3);
+        commandInput.BuildBuilding(BuildingType.TownCenter, Faction.Bright, position);
     }
 }

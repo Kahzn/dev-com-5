@@ -5,4 +5,6 @@ public class UnitPrefabsScriptableObject : ScriptableObject
 {
     public GameObject[] brightUnitPrefabs;
     public GameObject[] darkUnitPrefabs;
+    public GameObject[] brightBuildingPrefabs;
+    public GameObject[] darkBuildingPrefabs;
 }
