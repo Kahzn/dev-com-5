@@ -152,8 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f56ec1e276cc2043a7956d664e36fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiManagerPrefab: {fileID: 3187994114628661470, guid: 2c11ab74824e97c4e877ed1f3854884e, type: 3}
   unitPrefabs: {fileID: 11400000, guid: 8da152f8975949747a9c34109d4a37fc, type: 2}
+  buildings: []
 --- !u!4 &6059991
 Transform:
   m_ObjectHideFlags: 0
@@ -788,7 +788,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6059990}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: UltimateTest
+        m_MethodName: Test
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1120,8 +1120,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6059990}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1758758585}
+        m_TargetAssemblyTypeName: uiManager, Assembly-CSharp
         m_MethodName: SetBuildMode
         m_Mode: 3
         m_Arguments:
@@ -1170,6 +1170,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595898158}
   m_CullTransparentMesh: 1
+--- !u!1 &1758758584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1758758586}
+  - component: {fileID: 1758758585}
+  m_Layer: 0
+  m_Name: UiManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1758758585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758758584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b49f2b7123547b4bab01a84705e48e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameMode: 0
+  invalidBuildingLocationMaterial: {fileID: 2100000, guid: 60f982d44ea7969468bf7b7de813a4c7, type: 2}
+  towncenterPrefab: {fileID: 5428718812332583015, guid: 3043939a22e0acc40b21a96505d09197, type: 3}
+--- !u!4 &1758758586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758758584}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1800412468
 GameObject:
   m_ObjectHideFlags: 0

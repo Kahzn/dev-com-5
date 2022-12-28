@@ -27,4 +27,13 @@ public class CommandInput
     {
         // todo
     }
+
+    public GameObject BuildBuilding(BuildingType type, Faction faction, Vector3 position)
+    {
+        var prefab = (faction == Faction.Bright ? unitPrefabs.brightBuildingPrefabs : unitPrefabs.darkBuildingPrefabs)[(int)type];
+        Debug.Assert(prefab != null);
+        var building = GameManager.Instantiate(prefab, position, Quaternion.identity);
+        GameManager.Instance.buildings.Add(building);
+        return building;
+    }
 }
