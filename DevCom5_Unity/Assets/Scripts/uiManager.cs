@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class uiManager : MonoBehaviour
 {
+    public static uiManager Instance { get; private set; }
+
     public GameMode gameMode = GameMode.Normal;
     public Material invalidBuildingLocationMaterial = null;
     public GameObject towncenterPrefab = null;
@@ -13,6 +15,19 @@ public class uiManager : MonoBehaviour
     private GameObject selectedBuilding = null;
     private Material oldMaterial = null;
 
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -37,14 +52,14 @@ public class uiManager : MonoBehaviour
 
                             if (rigidBody == null) { break; }
 
-                            /*foreach (var building in buildings)
+                            foreach (var building in GameManager.Instance.buildings)
                             {
                                 if (rigidBody.gameObject == building)
                                 {
                                     SetProductionMode(building);
                                     break;
                                 }
-                            }*/
+                            }
                         }
                     }
                     break;
@@ -79,7 +94,7 @@ public class uiManager : MonoBehaviour
                         {
                             if (!building.IsColliding())
                             {
-                                buildingPreview.GetComponentInChildren<NavMeshObstacle>().enabled = true;
+                                buildingPreview.GetComponentInChildren<NavMeshObstacle>().enabled = true;                                
                                 //buildings.Add(buildingPreview);
                                 buildingPreview = null;
                                 gameMode = GameMode.Normal;
