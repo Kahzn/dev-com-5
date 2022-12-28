@@ -8,7 +8,7 @@ DevCom5_Unity/[Oo]bj/
 DevCom5_Unity/[Bb]uild/
 DevCom5_Unity/[Bb]uilds/
 DevCom5_Unity/[Ll]ogs/
-DevCom5_Unity/[Mm]emoryCaptures/
+DevCom5_Unity/[Mm]emory[Cc]aptures/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
