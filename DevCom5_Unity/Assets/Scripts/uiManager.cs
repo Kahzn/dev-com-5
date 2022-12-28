@@ -94,8 +94,9 @@ public class uiManager : MonoBehaviour
                         {
                             if (!building.IsColliding())
                             {
-                                buildingPreview.GetComponentInChildren<NavMeshObstacle>().enabled = true;                                
-                                //buildings.Add(buildingPreview);
+                                buildingPreview.GetComponentInChildren<NavMeshObstacle>().enabled = true;
+                                GameManager.Instance.commandInput.BuildBuilding(BuildingType.TownCenter, Faction.Bright, buildingPreview.transform.position);
+                                GameObject.Destroy(buildingPreview.gameObject);
                                 buildingPreview = null;
                                 gameMode = GameMode.Normal;
                             }
@@ -126,7 +127,7 @@ public class uiManager : MonoBehaviour
                             if (rigidBody == null) { SetNormalMode(); break; }
 
                             bool set = false;
-                            /*foreach (var building in buildings)
+                            foreach (var building in GameManager.Instance.buildings)
                             {
                                 if (rigidBody.gameObject == building)
                                 {
@@ -134,7 +135,7 @@ public class uiManager : MonoBehaviour
                                     set = true;
                                     break;
                                 }
-                            }*/
+                            }
                             if (!set) { SetNormalMode(); }
                         }
                     }
