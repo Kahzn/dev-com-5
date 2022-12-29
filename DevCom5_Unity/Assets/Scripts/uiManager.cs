@@ -35,113 +35,120 @@ public class uiManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+    void UpdateNormalMode()
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 100))
+            {
+                var rigidBody = hit.collider.gameObject.GetComponentInParent<Rigidbody>();
+
+                if (rigidBody == null) { return; }
+
+                foreach (var building in GameManager.Instance.buildings)
+                {
+                    if (rigidBody.gameObject == building)
+                    {
+                        SetProductionMode(building);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    private void UpdateBuildMode()
+    {
+        int layerMask = 1 << 10;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 100, layerMask))
+        {
+            if (buildingPreview == null)
+            {
+                var humanFaction = GameManager.Instance.factions[0];
+                var buildingPrefab = GameManager.Instance.prefabCollection.GetBuildingPrefab(humanFaction, BuildingType.TownCenter);
+                buildingPreview = GameObject.Instantiate(buildingPrefab);
+                buildingPreview.GetComponentInChildren<NavMeshObstacle>().enabled = false;
+                oldMaterial = buildingPreview.GetComponentInChildren<MeshRenderer>().material;
+                Debug.Assert(oldMaterial != null);
+            }
+            buildingPreview.transform.position = new Vector3(Mathf.Round(hit.point.x), hit.point.y, Mathf.Round(hit.point.z));
+            var building = buildingPreview.GetComponentInChildren<Building>();
+            if (building.IsColliding())
+            {
+                buildingPreview.GetComponentInChildren<MeshRenderer>().material = invalidBuildingLocationMaterial;
+            }
+            else
+            {
+                Debug.Assert(oldMaterial != null);
+                buildingPreview.GetComponentInChildren<MeshRenderer>().material = oldMaterial;
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                if (!building.IsColliding())
+                {
+                    buildingPreview.GetComponentInChildren<NavMeshObstacle>().enabled = true;
+                    GameManager.Instance.commandInput.BuildBuilding(BuildingType.TownCenter, Faction.Bright, buildingPreview.transform.position);
+                    GameObject.Destroy(buildingPreview.gameObject);
+                    buildingPreview = null;
+                    gameMode = GameMode.Normal;
+                }
+                else
+                {
+                    Debug.Log("no");
+                }
+            }
+        }
+        else
+        {
+            GameObject.Destroy(buildingPreview);
+            buildingPreview = null;
+        }
+    }
+
+    private void UpdateProductionMode()
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 100))
+            {
+                var rigidBody = hit.collider.gameObject.GetComponentInParent<Rigidbody>();
+
+                if (rigidBody == null) { SetNormalMode(); return; }
+
+                bool set = false;
+                foreach (var building in GameManager.Instance.buildings)
+                {
+                    if (rigidBody.gameObject == building)
+                    {
+                        SetProductionMode(building);
+                        set = true;
+                        break;
+                    }
+                }
+                if (!set) { SetNormalMode(); }
+            }
+        }
+    }
+
     void Update()
     {
         switch (gameMode)
         {
             case GameMode.Normal:
-                {
-                    if (Input.GetMouseButtonUp(0))
-                    {
-                        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                        RaycastHit hit;
-                        if (Physics.Raycast(ray, out hit, 100))
-                        {
-                            var rigidBody = hit.collider.gameObject.GetComponentInParent<Rigidbody>();
-
-                            if (rigidBody == null) { break; }
-
-                            foreach (var building in GameManager.Instance.buildings)
-                            {
-                                if (rigidBody.gameObject == building)
-                                {
-                                    SetProductionMode(building);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    break;
-                }
-
+                UpdateNormalMode();
+                break;
             case GameMode.Build:
-                {
-                    int layerMask = 1 << 10;
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit, 100, layerMask))
-                    {
-                        if (buildingPreview == null)
-                        {
-                            buildingPreview = GameObject.Instantiate(towncenterPrefab);
-                            buildingPreview.GetComponentInChildren<NavMeshObstacle>().enabled = false;
-                            oldMaterial = buildingPreview.GetComponentInChildren<MeshRenderer>().material;
-                            Debug.Assert(oldMaterial != null);
-                        }
-                        buildingPreview.transform.position = new Vector3(Mathf.Round(hit.point.x), hit.point.y, Mathf.Round(hit.point.z));
-                        var building = buildingPreview.GetComponentInChildren<Building>();
-                        if (building.IsColliding())
-                        {
-                            buildingPreview.GetComponentInChildren<MeshRenderer>().material = invalidBuildingLocationMaterial;
-                        }
-                        else
-                        {
-                            Debug.Assert(oldMaterial != null);
-                            buildingPreview.GetComponentInChildren<MeshRenderer>().material = oldMaterial;
-                        }
-                        if (Input.GetMouseButtonUp(0))
-                        {
-                            if (!building.IsColliding())
-                            {
-                                buildingPreview.GetComponentInChildren<NavMeshObstacle>().enabled = true;
-                                GameManager.Instance.commandInput.BuildBuilding(BuildingType.TownCenter, Faction.Bright, buildingPreview.transform.position);
-                                GameObject.Destroy(buildingPreview.gameObject);
-                                buildingPreview = null;
-                                gameMode = GameMode.Normal;
-                            }
-                            else
-                            {
-                                Debug.Log("no");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        GameObject.Destroy(buildingPreview);
-                        buildingPreview = null;
-                    }
-                    break;
-                }
-
+                UpdateBuildMode();
+                break;
             case GameMode.Production:
-                {
-                    if (Input.GetMouseButtonUp(0))
-                    {
-                        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                        RaycastHit hit;
-                        if (Physics.Raycast(ray, out hit, 100))
-                        {
-                            var rigidBody = hit.collider.gameObject.GetComponentInParent<Rigidbody>();
-
-                            if (rigidBody == null) { SetNormalMode(); break; }
-
-                            bool set = false;
-                            foreach (var building in GameManager.Instance.buildings)
-                            {
-                                if (rigidBody.gameObject == building)
-                                {
-                                    SetProductionMode(building);
-                                    set = true;
-                                    break;
-                                }
-                            }
-                            if (!set) { SetNormalMode(); }
-                        }
-                    }
-                    break;
-                }
-
+                UpdateProductionMode();
+                break;
             default:
                 Debug.Assert(false);
                 break;
