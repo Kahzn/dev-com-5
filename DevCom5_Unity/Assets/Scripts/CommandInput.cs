@@ -33,6 +33,7 @@ public class CommandInput
         var building = GameManager.Instantiate(prefab, position, Quaternion.identity);
         building.GetComponentInChildren<Building>().faction = faction;
         GameManager.Instance.buildings.Add(building);
+        GameManager.Instance.RecalculatePopulationValues();
         return building;
     }
 }
