@@ -44,7 +44,7 @@ public class uiManager : MonoBehaviour
     void Start()
     {
         UpdateProductionButtos();
-        errorText.text = "";
+        if(errorText != null) errorText.text = "";
         acceptErrorBtn.gameObject.SetActive(false);
     }
 
