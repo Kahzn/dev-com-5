@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
     }
 
     public CommandInput commandInput = null;
-    public UnitPrefabsScriptableObject unitPrefabs = null;
+    public UnitPrefabsScriptableObject prefabCollection = null;
+    public Faction[] factions = new Faction[] { Faction.Bright, Faction.Dark };
     public List<GameObject> buildings = new();
 
     private void Awake()
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         commandInput = new CommandInput();
-        commandInput.unitPrefabs = unitPrefabs;
+        commandInput.unitPrefabs = prefabCollection;
     }
 
     // Update is called once per frame
