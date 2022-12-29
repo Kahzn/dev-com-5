@@ -15,6 +15,9 @@ public class uiManager : MonoBehaviour
     public Material invalidBuildingLocationMaterial = null;
     public GameObject towncenterPrefab = null;
     public Button[] buttons = null;
+    public TextMeshProUGUI errorText = null;
+    public Button acceptErrorBtn = null;
+
 
     private GameObject buildingPreview = null;
     private GameObject selectedBuilding = null;
@@ -38,6 +41,8 @@ public class uiManager : MonoBehaviour
     void Start()
     {
         UpdateProductionButtos();
+        errorText.text = "";
+        acceptErrorBtn.gameObject.SetActive(false);
     }
 
     void UpdateNormalMode()
@@ -215,6 +220,12 @@ public class uiManager : MonoBehaviour
         UpdateProductionButtos();
     }
 
+    public void AcceptErrorBtnClicked()
+    {
+        errorText.text = "";
+        acceptErrorBtn.gameObject.SetActive(false);
+    }
+
     private void UpdateProductionButtos()
     {
         int unitCount = 0;
@@ -251,7 +262,13 @@ public class uiManager : MonoBehaviour
         var unitType = building.GetUnitTypeByIndex(index);
         if (unitType == UnitType.NONE) { Debug.LogError("Invalid Unity index for Building. Class: " + building.name + " index: " + index); return; }
 
-        GameManager.Instance.commandInput.BuildUnit(building, unitType);
+        var newBuilding = GameManager.Instance.commandInput.BuildUnit(building, unitType);
+        if (newBuilding == null)
+        {
+            errorText.text = "Not enough Materials";
+            acceptErrorBtn.gameObject.SetActive(true);
+            SetNormalMode();
+        }
     }
 
     public string GetStingFromUnitType(UnitType unitType)
@@ -264,7 +281,6 @@ public class uiManager : MonoBehaviour
                 return "Invalid";
             default:
                 return "Not Defined";
-                
         }
     }
 
