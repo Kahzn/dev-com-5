@@ -11,7 +11,7 @@ public class CommandInput
     {
         var spawnLocation = building.spawnLocation;
         var prefab = GameManager.Instance.prefabCollection.GetUnitPrefab(building.faction, type);        
-        return GameObject.Instantiate(prefab, spawnLocation);
+        return GameObject.Instantiate(prefab, spawnLocation.transform.position, Quaternion.identity);
     }
 
     public void MoveUnit(GameObject unit, Vector3 targetPosition)
