@@ -9,8 +9,17 @@ public class CommandInput
 
     public GameObject BuildUnit(Building building, UnitType type)
     {
+        var costs = GameManager.Instance.costs.GetUnitCosts(type);
+        var faction = building.faction;
+        var resources = GameManager.Instance.resourceDepots[(int)faction];
+        if (resources.Amount < costs)
+        {
+            return null;
+        }
+        GameManager.Instance.resourceDepots[(int)faction].Amount -= costs;
+
         var spawnLocation = building.spawnLocation;
-        var prefab = GameManager.Instance.prefabCollection.GetUnitPrefab(building.faction, type);        
+        var prefab = GameManager.Instance.prefabCollection.GetUnitPrefab(building.faction, type);
         return GameObject.Instantiate(prefab, spawnLocation.transform.position, Quaternion.identity);
     }
 
@@ -28,7 +37,16 @@ public class CommandInput
 
     public GameObject BuildBuilding(BuildingType type, Faction faction, Vector3 position)
     {
-        var prefab = GameManager.Instance.prefabCollection.GetBuildingPrefab(faction, type);        
+        var costs = GameManager.Instance.costs.GetBuildingCosts(type);
+        var resources = GameManager.Instance.resourceDepots[(int)faction];
+        if (resources.Amount < costs)
+        {
+            return null;
+        }
+
+        GameManager.Instance.resourceDepots[(int)faction].Amount -= costs;
+
+        var prefab = GameManager.Instance.prefabCollection.GetBuildingPrefab(faction, type);
         Debug.Assert(prefab != null);
         var building = GameManager.Instantiate(prefab, position, Quaternion.identity);
         building.GetComponentInChildren<Building>().faction = faction;
