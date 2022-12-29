@@ -11,7 +11,7 @@ public class CommandInput
     {
         var spawnLocation = building.spawnLocation;
         var prefab = GameManager.Instance.prefabCollection.GetUnitPrefab(building.faction, type);        
-        return GameObject.Instantiate(prefab, spawnLocation);
+        return GameObject.Instantiate(prefab, spawnLocation.transform.position, Quaternion.identity);
     }
 
     public void MoveUnit(GameObject unit, Vector3 targetPosition)
@@ -33,6 +33,7 @@ public class CommandInput
         var building = GameManager.Instantiate(prefab, position, Quaternion.identity);
         building.GetComponentInChildren<Building>().faction = faction;
         GameManager.Instance.buildings.Add(building);
+        GameManager.Instance.RecalculatePopulationValues();
         return building;
     }
 }
