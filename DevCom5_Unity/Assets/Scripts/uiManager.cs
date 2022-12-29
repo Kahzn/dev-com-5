@@ -114,7 +114,7 @@ public class uiManager : MonoBehaviour
                     renderer.materials = materials;
                 }
             }
-            else
+            else if (oldMaterials != null)
             {
                 Debug.Log($"restoring {oldMaterials.Count} materials");
                 int index = 0;
@@ -135,7 +135,7 @@ public class uiManager : MonoBehaviour
                 if (!building.IsColliding())
                 {
                     buildingPreview.GetComponentInChildren<NavMeshObstacle>().enabled = true;
-                    GameManager.Instance.commandInput.BuildBuilding(BuildingType.TownCenter, Faction.Bright, buildingPreview.transform.position);
+                    GameManager.Instance.commandInput.BuildBuilding(currentBuildingType, GameManager.Instance.factions[0], buildingPreview.transform.position);
                     GameObject.Destroy(buildingPreview.gameObject);
                     buildingPreview = null;
                     gameMode = GameMode.Normal;
