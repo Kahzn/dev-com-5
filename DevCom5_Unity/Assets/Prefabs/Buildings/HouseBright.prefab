@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1977295158003422853}
   - component: {fileID: 457226526476530075}
   - component: {fileID: 7598302031225300005}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HouseBright
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1973413540708690018}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spawn Location
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,9 +162,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2952356045871780859, guid: 8ccef45e4d91a61459617030d4d41ec7, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3227605312238681181, guid: 8ccef45e4d91a61459617030d4d41ec7, type: 3}
       propertyPath: m_Name
       value: house_light
+      objectReference: {fileID: 0}
+    - target: {fileID: 3227605312238681181, guid: 8ccef45e4d91a61459617030d4d41ec7, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3459848496746173409, guid: 8ccef45e4d91a61459617030d4d41ec7, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4459160485152012389, guid: 8ccef45e4d91a61459617030d4d41ec7, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4931262545232222926, guid: 8ccef45e4d91a61459617030d4d41ec7, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8357261269017776922, guid: 8ccef45e4d91a61459617030d4d41ec7, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ccef45e4d91a61459617030d4d41ec7, type: 3}

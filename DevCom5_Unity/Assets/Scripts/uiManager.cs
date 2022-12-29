@@ -84,7 +84,7 @@ public class uiManager : MonoBehaviour
                 var gamemanager = GameManager.Instance;
                 var humanFaction = gamemanager.factions[0];
                 var prefabCollection = gamemanager.prefabCollection;
-                var buildingPrefab = prefabCollection.GetBuildingPrefab(humanFaction, BuildingType.TownCenter);
+                var buildingPrefab = prefabCollection.GetBuildingPrefab(humanFaction, currentBuildingType);
                 buildingPreview = GameObject.Instantiate(buildingPrefab);
                 buildingPreview.GetComponentInChildren<NavMeshObstacle>().enabled = false;
 
