@@ -16,7 +16,7 @@ public class uiManager : MonoBehaviour
 
     private GameObject buildingPreview = null;
     private GameObject selectedBuilding = null;
-    private Material oldMaterial = null;
+    private List<Material> oldMaterials = null;
 
 
     private void Awake()
@@ -30,12 +30,6 @@ public class uiManager : MonoBehaviour
         {
             Instance = this;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
     }
 
     void UpdateNormalMode()
@@ -75,19 +69,47 @@ public class uiManager : MonoBehaviour
                 var buildingPrefab = GameManager.Instance.prefabCollection.GetBuildingPrefab(humanFaction, BuildingType.TownCenter);
                 buildingPreview = GameObject.Instantiate(buildingPrefab);
                 buildingPreview.GetComponentInChildren<NavMeshObstacle>().enabled = false;
-                oldMaterial = buildingPreview.GetComponentInChildren<MeshRenderer>().material;
-                Debug.Assert(oldMaterial != null);
+
+                oldMaterials = new();
+                foreach (var renderer in buildingPreview.GetComponentsInChildren<MeshRenderer>())
+                {
+                    foreach (var material in renderer.materials)
+                    {
+                        oldMaterials.Add(material);
+                    }
+                }
+                Debug.Log($"saved {oldMaterials.Count} materials");
             }
             buildingPreview.transform.position = new Vector3(Mathf.Round(hit.point.x), hit.point.y, Mathf.Round(hit.point.z));
             var building = buildingPreview.GetComponentInChildren<Building>();
             if (building.IsColliding())
             {
-                buildingPreview.GetComponentInChildren<MeshRenderer>().material = invalidBuildingLocationMaterial;
+                Debug.Log("Setting materials to 'invalid'");
+                foreach (var renderer in buildingPreview.GetComponentsInChildren<MeshRenderer>())
+                {
+                    var materials = new Material[renderer.materials.Length];
+                    for (int i = 0; i < materials.Length; i++)
+                    {
+                        materials[i] = invalidBuildingLocationMaterial;
+                    }
+                    renderer.materials = materials;
+                }
             }
             else
             {
-                Debug.Assert(oldMaterial != null);
-                buildingPreview.GetComponentInChildren<MeshRenderer>().material = oldMaterial;
+                Debug.Log($"restoring {oldMaterials.Count} materials");
+                int index = 0;
+                foreach (var renderer in buildingPreview.GetComponentsInChildren<MeshRenderer>())
+                {
+                    var materials = new Material[renderer.materials.Length];
+                    for (int i = 0; i < materials.Length; ++i)
+                    {
+                        materials[i] = oldMaterials[index];
+                    }
+                    renderer.materials = materials;
+                    index += materials.Length;
+                }
+                Debug.Assert(index == oldMaterials.Count);
             }
             if (Input.GetMouseButtonUp(0))
             {
