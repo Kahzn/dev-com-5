@@ -16,8 +16,10 @@ public class GameManager : MonoBehaviour
 
     private static GameManager instance;
 
+    public GameSettingsScriptableObject gameSettings = null;
     public CommandInput commandInput = null;
     public UnitPrefabsScriptableObject prefabCollection;
+    public CostsScriptableObject costs = null;
     public Faction[] factions = new Faction[] { Faction.Bright, Faction.Dark, Faction.Gaia };
     public ResourceDepot[] resourceDepots = null;
     public List<GameObject> buildings = new();
@@ -50,6 +52,12 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            resourceDepots = new ResourceDepot[Enum.GetValues(typeof(Faction)).Length];
+            for (int i = 0; i < resourceDepots.Length; i++)
+            {
+                resourceDepots[i] = new ResourceDepot();
+                resourceDepots[i].Amount = gameSettings.startingResources;
+            }
         }
     }
 
@@ -71,7 +79,7 @@ public class GameManager : MonoBehaviour
                 if (housing != null)
                 {
                     populationCapacity += housing.populationCapacityProvided;
-                }                
+                }
             }
             var factionIndex = (int)faction;
             resourceDepots[factionIndex].PopulationCap = populationCapacity;
