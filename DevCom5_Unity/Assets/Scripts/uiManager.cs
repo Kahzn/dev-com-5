@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class uiManager : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class uiManager : MonoBehaviour
     public GameMode gameMode = GameMode.Normal;
     public Material invalidBuildingLocationMaterial = null;
     public GameObject towncenterPrefab = null;
+    public Button[] buttons = null;
 
     private GameObject buildingPreview = null;
     private GameObject selectedBuilding = null;
@@ -174,5 +177,23 @@ public class uiManager : MonoBehaviour
         gameMode = GameMode.Production;
         buildingPreview = null;
         selectedBuilding = selected;
+        Debug.Log(gameMode);
+    }
+
+    public void BuildingButtonPress(int index)
+    {
+        Debug.Log(gameMode);
+        Debug.Log(index);
+
+        if (!selectedBuilding) { Debug.LogError("No selected building"); return; }
+
+        var building = selectedBuilding.GetComponentInChildren<Building>();
+
+        if (!building.HasUnitTypes()) { Debug.LogError("No Units to Build. Class: " + building.name); return; }
+
+        var unitType = building.GetUnitTypeByIndex(index);
+        if (unitType == UnitType.NONE) { Debug.LogError("Invalid Unity index for Building. Class: " + building.name + " index: " + index); return; }
+
+        GameManager.Instance.commandInput.BuildUnit(building, unitType);
     }
 }
