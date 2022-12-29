@@ -152,7 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f56ec1e276cc2043a7956d664e36fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitPrefabs: {fileID: 11400000, guid: 8da152f8975949747a9c34109d4a37fc, type: 2}
+  prefabCollection: {fileID: 11400000, guid: 8da152f8975949747a9c34109d4a37fc, type: 2}
+  factions: 0000000001000000
   buildings: []
 --- !u!4 &6059991
 Transform:
