@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     public CommandInput commandInput = null;
     public UnitPrefabsScriptableObject prefabCollection;
+    public CostsScriptableObject costs = null;
     public Faction[] factions = new Faction[] { Faction.Bright, Faction.Dark, Faction.Gaia };
     public ResourceDepot[] resourceDepots = null;
     public List<GameObject> buildings = new();
@@ -71,7 +72,7 @@ public class GameManager : MonoBehaviour
                 if (housing != null)
                 {
                     populationCapacity += housing.populationCapacityProvided;
-                }                
+                }
             }
             var factionIndex = (int)faction;
             resourceDepots[factionIndex].PopulationCap = populationCapacity;
