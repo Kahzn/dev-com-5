@@ -16,6 +16,7 @@ public class CommandInput
         {
             return null;
         }
+        GameManager.Instance.resourceDepots[(int)faction].Amount -= costs;
 
         var spawnLocation = building.spawnLocation;
         var prefab = GameManager.Instance.prefabCollection.GetUnitPrefab(building.faction, type);
@@ -42,6 +43,8 @@ public class CommandInput
         {
             return null;
         }
+
+        GameManager.Instance.resourceDepots[(int)faction].Amount -= costs;
 
         var prefab = GameManager.Instance.prefabCollection.GetBuildingPrefab(faction, type);
         Debug.Assert(prefab != null);

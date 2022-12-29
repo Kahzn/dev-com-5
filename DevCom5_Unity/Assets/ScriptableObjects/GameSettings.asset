@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86df192b93df2ee4cb802a1c1fc80e21, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  startingResources: 200
+  startingResources: 400

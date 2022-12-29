@@ -94,6 +94,7 @@ public class uiManager : MonoBehaviour
                     }
                 }
                 Debug.Log($"saved {oldMaterials.Count} materials");
+                return;
             }
             buildingPreview.transform.position = new Vector3(Mathf.Round(hit.point.x), hit.point.y, Mathf.Round(hit.point.z));
             var building = buildingPreview.GetComponentInChildren<Building>();
