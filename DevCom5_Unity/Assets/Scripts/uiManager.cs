@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
 using TMPro;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -22,6 +23,8 @@ public class uiManager : MonoBehaviour
     private GameObject buildingPreview = null;
     private GameObject selectedBuilding = null;
     private List<Material> oldMaterials = null;
+    private BuildingType currentBuildingType;
+    private int buttonClickCounter = 0;
 
 
     private void Awake()
@@ -81,7 +84,7 @@ public class uiManager : MonoBehaviour
                 var gamemanager = GameManager.Instance;
                 var humanFaction = gamemanager.factions[0];
                 var prefabCollection = gamemanager.prefabCollection;
-                var buildingPrefab = prefabCollection.GetBuildingPrefab(humanFaction, BuildingType.TownCenter);
+                var buildingPrefab = prefabCollection.GetBuildingPrefab(humanFaction, currentBuildingType);
                 buildingPreview = GameObject.Instantiate(buildingPrefab);
                 buildingPreview.GetComponentInChildren<NavMeshObstacle>().enabled = false;
 
@@ -111,7 +114,7 @@ public class uiManager : MonoBehaviour
                     renderer.materials = materials;
                 }
             }
-            else
+            else if (oldMaterials != null)
             {
                 Debug.Log($"restoring {oldMaterials.Count} materials");
                 int index = 0;
@@ -132,7 +135,7 @@ public class uiManager : MonoBehaviour
                 if (!building.IsColliding())
                 {
                     buildingPreview.GetComponentInChildren<NavMeshObstacle>().enabled = true;
-                    GameManager.Instance.commandInput.BuildBuilding(BuildingType.TownCenter, Faction.Bright, buildingPreview.transform.position);
+                    GameManager.Instance.commandInput.BuildBuilding(currentBuildingType, GameManager.Instance.factions[0], buildingPreview.transform.position);
                     GameObject.Destroy(buildingPreview.gameObject);
                     buildingPreview = null;
                     gameMode = GameMode.Normal;
@@ -212,6 +215,7 @@ public class uiManager : MonoBehaviour
         gameMode = GameMode.Build;
         buildingPreview = null;
         selectedBuilding = null;
+        currentBuildingType = (BuildingType)buildingType;
         UpdateProductionButtos();
     }
     private void SetProductionMode(GameObject selected)
@@ -271,6 +275,20 @@ public class uiManager : MonoBehaviour
             errorText.text = "Not enough Materials";
             acceptErrorBtn.gameObject.SetActive(true);
             SetNormalMode();
+        }
+    }
+
+    public void ButtonClick()
+    {
+        ++buttonClickCounter;
+
+        Debug.Log(buttonClickCounter);
+
+        if (buttonClickCounter == 666)
+        {
+            errorText.text = "!!!!!666666!!!!!";
+            acceptErrorBtn.gameObject.SetActive(true);
+            buttonClickCounter = 0;
         }
     }
 

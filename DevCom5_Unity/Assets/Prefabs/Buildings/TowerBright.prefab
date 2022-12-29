@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6760394751139120678}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spawn Location
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 6760394752142471818}
   - component: {fileID: 6760394752142471819}
   - component: {fileID: 6760394752142471816}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TowerBright
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,9 +104,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6760394752142471818}
     m_Modifications:
+    - target: {fileID: 975747000433999821, guid: 0f7922f32f189a348b1cc7c8a8cc4189, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1209260001732292621, guid: 0f7922f32f189a348b1cc7c8a8cc4189, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617616920799348449, guid: 0f7922f32f189a348b1cc7c8a8cc4189, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669630507570989244, guid: 0f7922f32f189a348b1cc7c8a8cc4189, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 8528778299026921299, guid: 0f7922f32f189a348b1cc7c8a8cc4189, type: 3}
       propertyPath: m_Name
       value: tower_orange
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528778299026921299, guid: 0f7922f32f189a348b1cc7c8a8cc4189, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 9013846903841820137, guid: 0f7922f32f189a348b1cc7c8a8cc4189, type: 3}
       propertyPath: m_RootOrder
@@ -177,3 +197,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0873392, y: 1.0873393, z: 2.9069054}
   m_Center: {x: 1.720352e-21, y: 0.000000059604645, z: 1.441097}
+--- !u!208 &6076356699626771857
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3138430158570542429}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.53, y: 0.56, z: 1.47}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.02, y: 0, z: 1.43}
+  m_TimeToStationary: 0.5

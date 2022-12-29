@@ -18,5 +18,13 @@ MonoBehaviour:
   - {fileID: 9025234271591828874, guid: e5c867a25b9964842a1f4ac0c7327e68, type: 3}
   brightBuildingPrefabs:
   - {fileID: 5428718812332583015, guid: f027ea10054856d45b6a654e0bbabee8, type: 3}
+  - {fileID: 761604237274725726, guid: bbd81602329307a47bfd1cd81749935b, type: 3}
+  - {fileID: 6760394752142471817, guid: 1e343a033dd92384993a24f55101b653, type: 3}
+  - {fileID: 9121433254121978493, guid: 2ecb67802dcf2b446bb5aa4b1b1fae0b, type: 3}
+  - {fileID: 4759253148442669373, guid: 0ba80eeba1c9c5849b3973ddeff3e44f, type: 3}
   darkBuildingPrefabs:
   - {fileID: 5428718812332583015, guid: 3043939a22e0acc40b21a96505d09197, type: 3}
+  - {fileID: 761604237274725726, guid: 476cdd394c9fcc444b8c7a726f8fb8ae, type: 3}
+  - {fileID: 6760394752142471817, guid: d737dce2ad3f7364f945bd1e1fcce994, type: 3}
+  - {fileID: 9121433254121978493, guid: b4878b2ffe4096041b3b8fe7b8b3e60a, type: 3}
+  - {fileID: 4759253148442669373, guid: af228e4fdfa612347ab34b8c7dba9b0c, type: 3}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6090548262436825326}
   - component: {fileID: 421957092572123746}
   - component: {fileID: 1009487315553279595}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: O-BamaBright
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8809504818836256073}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spawn Location
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,9 +104,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6090548262436825326}
     m_Modifications:
+    - target: {fileID: 1726002400486704086, guid: cc68c0b37d8869e4a8b56465f569fadd, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4510394452403167720, guid: cc68c0b37d8869e4a8b56465f569fadd, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4940881684577106489, guid: cc68c0b37d8869e4a8b56465f569fadd, type: 3}
       propertyPath: m_Name
       value: kaserne_light
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940881684577106489, guid: cc68c0b37d8869e4a8b56465f569fadd, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5754009443411157123, guid: cc68c0b37d8869e4a8b56465f569fadd, type: 3}
       propertyPath: m_RootOrder
@@ -152,6 +164,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6512047736219560938, guid: cc68c0b37d8869e4a8b56465f569fadd, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6712469481774089941, guid: cc68c0b37d8869e4a8b56465f569fadd, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7556228612012908124, guid: cc68c0b37d8869e4a8b56465f569fadd, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673663746264504804, guid: cc68c0b37d8869e4a8b56465f569fadd, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7679361438324709130, guid: cc68c0b37d8869e4a8b56465f569fadd, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7718936937296030847, guid: cc68c0b37d8869e4a8b56465f569fadd, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858742706405222067, guid: cc68c0b37d8869e4a8b56465f569fadd, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc68c0b37d8869e4a8b56465f569fadd, type: 3}
 --- !u!4 &2438342612444820505 stripped
@@ -177,3 +217,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8832246, y: 0.89220726, z: 0.6496739}
   m_Center: {x: -7.828691e-17, y: -0.008982718, z: 0.31439525}
+--- !u!208 &5380544917443307670
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3070728183675940515}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.44, y: 0.485, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.02, y: 0, z: 0.48}
+  m_TimeToStationary: 0.5
