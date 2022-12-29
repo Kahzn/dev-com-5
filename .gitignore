@@ -23,6 +23,9 @@ DevCom5_Unity/[Uu]ser[Ss]ettings
 # Visual Studio cache directory
 DevCom5_Unity/.vs/
 
+# Visual Studio Code
+DevCom5_Unity/.vscode/
+
 # Gradle cache directory
 DevCom5_Unity/.gradle/
 
