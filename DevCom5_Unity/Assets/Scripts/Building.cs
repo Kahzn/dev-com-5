@@ -59,4 +59,8 @@ public class Building : MonoBehaviour
     {
         return toBuild.Count > 0;
     }
+    public int GetUnitCount()
+    {
+        return toBuild.Count;
+    }
 }
