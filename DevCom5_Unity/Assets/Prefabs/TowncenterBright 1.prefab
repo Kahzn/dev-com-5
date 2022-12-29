@@ -80,7 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faction: 0
   spawnLocation: {fileID: 8084361081605445994}
-  toBuild: 
+  toBuild: 00000000
 --- !u!54 &8778474090500480192
 Rigidbody:
   m_ObjectHideFlags: 0

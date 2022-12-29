@@ -46,4 +46,17 @@ public class Building : MonoBehaviour
     {
         return numCollisions > 0;
     }
+
+    public UnitType GetUnitTypeByIndex(int index)
+    {
+        if (toBuild.Count - 1 > index) { Debug.LogError("Index out of range. provided index: " + index + " max index: " + (toBuild.Count - 1)); return UnitType.NONE; }
+        else if (index < 0) { Debug.LogError("Index out of range. provided index: " + index + " min index: 0"); return UnitType.NONE; }
+
+        else { return (UnitType)toBuild[index]; }
+    }
+
+    public bool HasUnitTypes()
+    {
+        return toBuild.Count > 0;
+    }
 }
