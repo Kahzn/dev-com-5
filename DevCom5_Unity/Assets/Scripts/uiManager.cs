@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -13,6 +15,9 @@ public class uiManager : MonoBehaviour
     public Material invalidBuildingLocationMaterial = null;
     public GameObject towncenterPrefab = null;
     public Button[] buttons = null;
+    public TextMeshProUGUI errorText = null;
+    public Button acceptErrorBtn = null;
+
 
     private GameObject buildingPreview = null;
     private GameObject selectedBuilding = null;
@@ -30,6 +35,14 @@ public class uiManager : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        UpdateProductionButtos();
+        errorText.text = "";
+        acceptErrorBtn.gameObject.SetActive(false);
     }
 
     void UpdateNormalMode()
@@ -138,6 +151,9 @@ public class uiManager : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
+            float HeightRef = Input.mousePosition.y / Screen.height;
+            if (HeightRef < 0.1f) { return; }
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100))
@@ -158,6 +174,7 @@ public class uiManager : MonoBehaviour
                 }
                 if (!set) { SetNormalMode(); }
             }
+            else {  SetNormalMode(); }
         }
     }
 
@@ -182,31 +199,60 @@ public class uiManager : MonoBehaviour
 
     private void SetNormalMode()
     {
-        Debug.Log("Out");
         gameMode = GameMode.Normal;
         buildingPreview = null;
         selectedBuilding = null;
+        UpdateProductionButtos();
     }
     public void SetBuildMode(int buildingType)
     {
         gameMode = GameMode.Build;
         buildingPreview = null;
         selectedBuilding = null;
+        UpdateProductionButtos();
     }
     private void SetProductionMode(GameObject selected)
     {
-        Debug.Log(selected.name);
         gameMode = GameMode.Production;
         buildingPreview = null;
         selectedBuilding = selected;
-        Debug.Log(gameMode);
+
+        UpdateProductionButtos();
+    }
+
+    public void AcceptErrorBtnClicked()
+    {
+        errorText.text = "";
+        acceptErrorBtn.gameObject.SetActive(false);
+    }
+
+    private void UpdateProductionButtos()
+    {
+        int unitCount = 0;
+        Building building = null;
+        if (selectedBuilding)
+        {
+            building = selectedBuilding.GetComponentInChildren<Building>();
+            unitCount = building.GetUnitCount();
+        }
+
+        for (int i = 0; i < buttons.Length; ++i)
+        {
+            if (i < unitCount)
+            {
+                buttons[i].gameObject.SetActive(true);
+                buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = GetStingFromUnitType(building.GetUnitTypeByIndex(i));
+
+                continue;
+            }
+
+            buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = "Invalid";
+            buttons[i].gameObject.SetActive(false);
+        }
     }
 
     public void BuildingButtonPress(int index)
     {
-        Debug.Log(gameMode);
-        Debug.Log(index);
-
         if (!selectedBuilding) { Debug.LogError("No selected building"); return; }
 
         var building = selectedBuilding.GetComponentInChildren<Building>();
@@ -216,6 +262,36 @@ public class uiManager : MonoBehaviour
         var unitType = building.GetUnitTypeByIndex(index);
         if (unitType == UnitType.NONE) { Debug.LogError("Invalid Unity index for Building. Class: " + building.name + " index: " + index); return; }
 
-        GameManager.Instance.commandInput.BuildUnit(building, unitType);
+        var newBuilding = GameManager.Instance.commandInput.BuildUnit(building, unitType);
+        if (newBuilding == null)
+        {
+            errorText.text = "Not enough Materials";
+            acceptErrorBtn.gameObject.SetActive(true);
+            SetNormalMode();
+        }
+    }
+
+    public string GetStingFromUnitType(UnitType unitType)
+    {
+        switch (unitType)
+        {
+            case UnitType.Worker:
+                return "Worker";
+            case UnitType.NONE:
+                return "Invalid";
+            default:
+                return "Not Defined";
+        }
+    }
+
+    public string GetStringFromBuildingType(BuildingType buildingType)
+    {
+        switch (buildingType)
+        {
+            case BuildingType.TownCenter:
+                return "Town Center";
+            default:
+                return "No Name";
+        }
     }
 }
