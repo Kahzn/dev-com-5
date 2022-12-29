@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public CommandInput commandInput = null;
     public UnitPrefabsScriptableObject unitPrefabs = null;
     public List<GameObject> buildings = new();
+    public Faction[] factions = new Faction[] { Faction.Bright, Faction.Dark };
 
     private void Awake()
     {
