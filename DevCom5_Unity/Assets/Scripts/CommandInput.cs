@@ -10,9 +10,7 @@ public class CommandInput
     public GameObject BuildUnit(Building building, UnitType type)
     {
         var spawnLocation = building.spawnLocation;
-        var faction = (int)building.faction;
-        Debug.Assert(faction == 0 || faction == 1);
-        var prefab = (faction == 0 ? unitPrefabs.brightUnitPrefabs : unitPrefabs.darkUnitPrefabs)[(int)type];
+        var prefab = GameManager.Instance.prefabCollection.GetUnitPrefab(building.faction, type);        
         return GameObject.Instantiate(prefab, spawnLocation);
     }
 
@@ -30,9 +28,10 @@ public class CommandInput
 
     public GameObject BuildBuilding(BuildingType type, Faction faction, Vector3 position)
     {
-        var prefab = (faction == Faction.Bright ? unitPrefabs.brightBuildingPrefabs : unitPrefabs.darkBuildingPrefabs)[(int)type];
+        var prefab = GameManager.Instance.prefabCollection.GetBuildingPrefab(faction, type);        
         Debug.Assert(prefab != null);
         var building = GameManager.Instantiate(prefab, position, Quaternion.identity);
+        building.GetComponentInChildren<Building>().faction = faction;
         GameManager.Instance.buildings.Add(building);
         return building;
     }

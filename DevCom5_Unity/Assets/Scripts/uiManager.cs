@@ -68,7 +68,9 @@ public class uiManager : MonoBehaviour
         {
             if (buildingPreview == null)
             {
-                buildingPreview = GameObject.Instantiate(towncenterPrefab);
+                var humanFaction = GameManager.Instance.factions[0];
+                var buildingPrefab = GameManager.Instance.prefabCollection.GetBuildingPrefab(humanFaction, BuildingType.TownCenter);
+                buildingPreview = GameObject.Instantiate(buildingPrefab);
                 buildingPreview.GetComponentInChildren<NavMeshObstacle>().enabled = false;
                 oldMaterial = buildingPreview.GetComponentInChildren<MeshRenderer>().material;
                 Debug.Assert(oldMaterial != null);
