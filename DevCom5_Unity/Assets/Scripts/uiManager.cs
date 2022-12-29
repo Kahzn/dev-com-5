@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
 using TMPro;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -22,6 +23,7 @@ public class uiManager : MonoBehaviour
     private GameObject buildingPreview = null;
     private GameObject selectedBuilding = null;
     private List<Material> oldMaterials = null;
+    private BuildingType currentBuildingType;
 
 
     private void Awake()
@@ -212,6 +214,7 @@ public class uiManager : MonoBehaviour
         gameMode = GameMode.Build;
         buildingPreview = null;
         selectedBuilding = null;
+        currentBuildingType = (BuildingType)buildingType;
         UpdateProductionButtos();
     }
     private void SetProductionMode(GameObject selected)
