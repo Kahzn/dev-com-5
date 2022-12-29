@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: UnitPrefabs
   m_EditorClassIdentifier: 
   brightUnitPrefabs:
-  - {fileID: 8091829740327780905, guid: 97eb82a6c9677ae459a7fa800683e1c9, type: 3}
+  - {fileID: 9025234271591828874, guid: b6645ad62b092e4448b9ad3bd3f01750, type: 3}
   darkUnitPrefabs:
-  - {fileID: 8091829740327780905, guid: fa7f5450492d9f84f85588d0e9e0a11d, type: 3}
+  - {fileID: 9025234271591828874, guid: e5c867a25b9964842a1f4ac0c7327e68, type: 3}
   brightBuildingPrefabs:
   - {fileID: 5428718812332583015, guid: f027ea10054856d45b6a654e0bbabee8, type: 3}
   darkBuildingPrefabs:
