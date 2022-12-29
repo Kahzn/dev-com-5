@@ -24,6 +24,7 @@ public class uiManager : MonoBehaviour
     private GameObject selectedBuilding = null;
     private List<Material> oldMaterials = null;
     private BuildingType currentBuildingType;
+    private int buttonClickCounter = 0;
 
 
     private void Awake()
@@ -274,6 +275,20 @@ public class uiManager : MonoBehaviour
             errorText.text = "Not enough Materials";
             acceptErrorBtn.gameObject.SetActive(true);
             SetNormalMode();
+        }
+    }
+
+    public void ButtonClick()
+    {
+        ++buttonClickCounter;
+
+        Debug.Log(buttonClickCounter);
+
+        if (buttonClickCounter == 666)
+        {
+            errorText.text = "!!!!!666666!!!!!";
+            acceptErrorBtn.gameObject.SetActive(true);
+            buttonClickCounter = 0;
         }
     }
 
